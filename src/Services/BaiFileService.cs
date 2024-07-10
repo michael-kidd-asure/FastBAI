@@ -8,14 +8,17 @@ namespace FastBAI.Services
 {
     public class BaiFileService : IBaiFileService
     {
-        private Stream _fileStream;
+        private Stream? _fileStream;
         private BaiFile _baiFile = new();
 
-        private void ParseFile()
+        public void ParseFile()
         {
             GroupHeaderRecord currentGroup = new();
             AccountIdentifierRecord currentAccount = new();
-            TxDetailRecord currentDetail = null;
+            TxDetailRecord? currentDetail = null;
+
+            if (_fileStream == null) 
+                throw new Exception("File Stream is unexpectedly null.  Cannot proceed.");
 
             using (StreamReader reader = new StreamReader(_fileStream))
             {
@@ -93,13 +96,14 @@ namespace FastBAI.Services
             return _baiFile;
         }
 
-        public void ProcessFile(string filePath)
+        public BaiFile ProcessFile(string filePath)
         {
             ReadFile(filePath);
             ParseFile();
+            return _baiFile;
         }
 
-        private void ReadFile(string filePath)
+        public void ReadFile(string filePath)
         {
             try
             {

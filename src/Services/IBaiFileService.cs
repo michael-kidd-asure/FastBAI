@@ -1,7 +1,9 @@
-﻿namespace ACH_Transform.BaiFileProcessor.Services
+﻿using ACH_Transform.BaiFileProcessor.Models;
+
+namespace ACH_Transform.BaiFileProcessor.Services
 {
     internal interface IBaiFileService
     {
-        public void ProcessFile(string filePath);
+        public BaiFile ProcessFile(string filePath);
     }
 }
