@@ -2,7 +2,6 @@
 using FastBAI.Services;
 
 Console.WriteLine("Hello, World!");
-BaiFileService fileService = new BaiFileService();
-fileService.ProcessFile(@"../../../Files/BAIDAY1.txt");
-var baiFile = fileService.GetFile();
-Console.WriteLine(baiFile.FileHeader.Groups?.First()?.Accounts?.First().AccountNumber);
+BaiFileService service = new BaiFileService();
+var file = service.ProcessFile(@"..\..\..\Files\BAIDAY1.txt");
+Console.WriteLine(file.FileHeader.Groups.First().Accounts.First().AccountNumber);
